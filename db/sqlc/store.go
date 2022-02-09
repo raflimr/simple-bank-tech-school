@@ -9,7 +9,7 @@ import (
 // Store provides all functions to execute db queries and transcantion
 type Store interface {
 	Querier
-	TransferTx(ctx context.Context, arg TransfetTxParams) (TransferTxResult, error)
+	TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error)
 }
 
 // Store provides all functions to execute db queries and transactions
@@ -45,8 +45,8 @@ func (store *SQLStore) execTx(ctx context.Context, fn func(*Queries) error) erro
 	return tx.Commit()
 }
 
-//TransfetTxParams Contains the input paramaters of the transfer transaction
-type TransfetTxParams struct {
+//TransferTxParams Contains the input paramaters of the transfer transaction
+type TransferTxParams struct {
 	FromAccountID int64 `json:"from_account_id"`
 	ToAccountID   int64 `json:"to_account_id"`
 	Amount        int64 `json:"amount"`
@@ -63,7 +63,7 @@ type TransferTxResult struct {
 
 var txKey = struct{}{}
 
-func (store *SQLStore) TransferTx(ctx context.Context, arg TransfetTxParams) (TransferTxResult, error) {
+func (store *SQLStore) TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error) {
 	var result TransferTxResult
 
 	err := store.execTx(ctx, func(q *Queries) error {
