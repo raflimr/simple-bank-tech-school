@@ -44,5 +44,7 @@ mockrename:
 	docker run -v F:\!RyuEXP\Golang\project\simple-bank-tech-school:/app -w /app ekofr/gomock:latest \
 	mockgen -package mockdb --destination db/mock/store.go simplebank-tech-school/db/sqlc Store 
 
+dockerbuild:
+	docker build -t simplebank:latest .
 
 .PHONY: postgres createdb dropdb migrateup migratedown sqlc test server mockhelp mock mockrename migratecreate
