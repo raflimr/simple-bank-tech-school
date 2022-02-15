@@ -39,9 +39,15 @@ func NewServer(config utils.Config, store db.Store) (*Server, error) {
 
 	router.POST("/accounts", server.createAccount)
 	router.POST("/users", server.createUser)
-	router.GET("/accounts/:id", server.getAccount)
-	router.GET("/accounts", server.listAccount)
-	router.POST("/transfers", server.createTransfer)
+
+	authRoutes := router.Group("/").Use(authMiddleware(server.tokenMaker))
+
+	authRoutes.POST("/users/login", server.loginUser)
+	authRoutes.GET("/accounts/:id", server.getAccount)
+	authRoutes.GET("/accounts", server.listAccount)
+
+	authRoutes.POST("/transfers", server.createTransfer)
+
 	server.router = router
 	return server, nil
 }

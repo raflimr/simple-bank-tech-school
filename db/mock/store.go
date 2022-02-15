@@ -80,6 +80,9 @@ func (mr *MockStoreMockRecorder) CreateEntry(arg0, arg1 interface{}) *gomock.Cal
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateEntry", reflect.TypeOf((*MockStore)(nil).CreateEntry), arg0, arg1)
 }
 
+
+
+
 // CreateTransfer mocks base method.
 func (m *MockStore) CreateTransfer(arg0 context.Context, arg1 db.CreateTransferParams) (db.Transfer, error) {
 	m.ctrl.T.Helper()
